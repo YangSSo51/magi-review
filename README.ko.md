@@ -37,6 +37,6 @@ python /path/to/magi-review/scripts/install.py --host claude --destination .clau
 
 [연구 노트](docs/RESEARCH.md)는 성공 사례와 부정적 결과를 함께 다룹니다. 특히 동일 모델의 세 역할을 사용한 MABPD, 역할 편향을 확인한 Beyond Consensus, 같은 예산의 독립 응답과 비교한 Beyond Symmetric Agents가 설계에 관련됩니다. 이 스킬 자체가 최신 고성능 모델의 개발 작업에서 성능을 높인다는 실험 결과는 아직 없습니다.
 
-설치 동작과 설정의 로컬 검사를 제공하지만 Claude Code/Codex 실환경의 전체 모델 실행 검증은 아직 수행하지 않았습니다. 합의는 증명이나 테스트 통과가 아닙니다.
+Codex에서 모델·판단 기준 선택, 격리된 세 평가자 실행, 근거 확인, Plan과 네이티브 Goal 등록을 [한 차례 검증했습니다](docs/CODEX-VALIDATION.md). 설치된 스킬을 수동으로 읽어 실행했으므로 선택기 자동 발견은 미검증이며, Claude Code의 실제 모델 실행도 아직 검증하지 않았습니다. 세 호출에 `gpt-6.1-sol/high`를 지정했지만 백엔드 모델의 독립 인증은 제공되지 않았습니다. 한 번의 실행은 성능 향상이나 일반적 신뢰성을 입증하지 않습니다.
 
-MIT 라이선스로 배포합니다. [GitHub 저장소](https://github.com/YangSSo51/magi-review)에서 설치할 수 있습니다. Ponytail·i-have-adhd·Graphify의 소개와 설치 안내 구성을 참고했고, 코드·스킬 본문·이미지는 가져오지 않았습니다. [참고 저장소와 라이선스](docs/ACKNOWLEDGMENTS.md)에 정리했습니다. [게시 및 검증 확인 사항](docs/RELEASE.md)
+MIT 라이선스로 배포합니다. [GitHub 저장소](https://github.com/YangSSo51/magi-review)에서 설치할 수 있습니다. [게시 및 검증 확인 사항](docs/RELEASE.md)

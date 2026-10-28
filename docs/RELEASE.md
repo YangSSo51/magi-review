@@ -16,4 +16,8 @@ Before publishing:
 python -m unittest discover -s tests -v
 ```
 
-The installer needs no third-party dependencies. Tests run in temporary directories and make no model or network calls.
+The installer needs no third-party dependencies. Tests run in temporary directories and make no model or network calls. They include partial-copy failure, cleanup/retry, and delayed publication of the discoverable manifest.
+
+## Codex workflow trial
+
+See [the scoped run report](CODEX-VALIDATION.md) for the three evaluator launches, findings, Plan, and native Goal registration. Claude Code live execution, native selector discovery, backend identity attestation, and comparative performance remain unverified.

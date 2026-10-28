@@ -26,13 +26,17 @@ python scripts/install.py --host claude --destination ~/.claude/skills/magi-revi
 
 For Windows PowerShell, pass `"$HOME/.agents/skills/magi-review"` or `"$HOME/.claude/skills/magi-review"` for the personal destination. Hosts with legacy skill paths may require another explicit destination. Do not install the same skill in multiple scopes.
 
-The script copies the skill and MIT license, applies the host's explicit-only setting, and refuses any existing destination. It does not alter global agent instructions, credentials, model settings, or shell profiles.
+The script copies the skill and MIT license, applies the host's explicit-only setting, and refuses any existing destination. It publishes SKILL.md after supporting files are ready. On an installation error, it removes only the new installation directory created by that invocation; if cleanup also fails, it reports the exact path for inspection before retrying. It does not alter global agent instructions, credentials, model settings, or shell profiles.
 
 ## Without Python
 
 1. Copy `skills/magi-review` to the appropriate skill folder and copy the root `LICENSE` into that installed folder.
 2. For Claude Code, add `disable-model-invocation: true` inside SKILL.md's opening YAML frontmatter. Codex uses the supplied `agents/openai.yaml`.
 3. Open a fresh host session or use its supported skill reload command, then explicitly invoke `$magi-review` in Codex or `/magi-review` in Claude Code.
+
+## After either installation method
+
+Open a fresh host session or use that client's supported skill reload mechanism. Confirm that MAGI Review appears in its skill selector or command list before invoking it. A successful installer exit confirms files were written; it does not confirm that an already-running session discovered them. If it is missing, check the active client's skill paths and duplicate installations before retrying.
 
 ## Update or remove
 

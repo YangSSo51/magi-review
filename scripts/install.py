@@ -22,11 +22,28 @@ def install(host: str, destination: Path) -> Path:
     if host == "claude":
         skill = skill.replace("---\n", "---\ndisable-model-invocation: true\n", 1)
     target.mkdir(parents=True, exist_ok=False)
-    (target / "SKILL.md").write_text(skill, encoding="utf-8")
-    (target / "LICENSE").write_text(license_text, encoding="utf-8")
-    shutil.copytree(SOURCE / "references", target / "references")
-    if host == "codex":
-        shutil.copytree(SOURCE / "agents", target / "agents")
+    owned_target = target.resolve()
+    try:
+        (target / "LICENSE").write_text(license_text, encoding="utf-8")
+        shutil.copytree(SOURCE / "references", target / "references")
+        if host == "codex":
+            shutil.copytree(SOURCE / "agents", target / "agents")
+        # Publish the discoverable manifest only after all required assets exist.
+        manifest = target / ".SKILL.md.tmp"
+        manifest.write_text(skill, encoding="utf-8")
+        manifest.replace(target / "SKILL.md")
+    except Exception as error:
+        try:
+            # Only remove this invocation's new directory at its original location.
+            if target.is_symlink() or target.resolve() != owned_target:
+                raise OSError("Installation path changed; refusing cleanup")
+            shutil.rmtree(owned_target)
+        except OSError as cleanup_error:
+            raise OSError(
+                f"Installation failed ({error}); cleanup failed at {target}: {cleanup_error}. "
+                "Inspect this incomplete installation before retrying."
+            ) from error
+        raise
     return target
 
 

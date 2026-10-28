@@ -2,6 +2,7 @@ import importlib.util
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -47,6 +48,31 @@ class InstallTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 installer.install("unknown", target)
             self.assertFalse(target.exists())
+
+    def test_copy_failure_removes_new_destination_and_allows_retry(self):
+        for host in ("codex", "claude"):
+            with self.subTest(host=host), tempfile.TemporaryDirectory() as folder:
+                target = Path(folder) / "magi-review"
+                with patch.object(installer.shutil, "copytree", side_effect=OSError("copy failed")):
+                    with self.assertRaisesRegex(OSError, "copy failed"):
+                        installer.install(host, target)
+                self.assertFalse(target.exists())
+                installer.install(host, target)
+                self.assertTrue((target / "SKILL.md").is_file())
+
+    def test_skill_is_not_discoverable_until_supporting_files_are_ready(self):
+        real_copytree = installer.shutil.copytree
+        for host in ("codex", "claude"):
+            with self.subTest(host=host), tempfile.TemporaryDirectory() as folder:
+                target = Path(folder) / "magi-review"
+
+                def copy_supporting_files(source, destination, *args, **kwargs):
+                    self.assertFalse((target / "SKILL.md").exists())
+                    return real_copytree(source, destination, *args, **kwargs)
+
+                with patch.object(installer.shutil, "copytree", side_effect=copy_supporting_files):
+                    installer.install(host, target)
+                self.assertTrue((target / "SKILL.md").is_file())
 
 
 if __name__ == "__main__":

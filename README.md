@@ -29,7 +29,7 @@ python scripts/install.py --host codex --destination ~/.agents/skills/magi-revie
 
 The optional installer uses **Python 3.10+ with no third-party packages**. It refuses existing destinations. For PowerShell paths, project installations, legacy clients, or installation without Python, see [INSTALL.md](INSTALL.md).
 
-Then invoke the skill in your assistant:
+Open a fresh host session or use its supported skill reload mechanism, and confirm MAGI Review appears in the skill selector or command list. Then invoke it:
 
 | Host | Invocation |
 | --- | --- |
@@ -87,7 +87,9 @@ MAGI Review is **research-informed; this exact workflow has not been benchmarked
 
 The package requires host support for subagents and model selection/inheritance. It does not install models, provide cross-provider routing, or require API keys of its own. Reviews consume your host's normal model usage. Unsupported capabilities are reported rather than simulated. See [host notes](skills/magi-review/references/hosts.md).
 
-Local tests cover installation, explicit-only metadata, license copying, and identical workflow bodies. **Live end-to-end model reviews in Claude Code and Codex have not yet been run.** Same-model agreement is not proof; equal aliases do not guarantee pinned backend versions.
+One [Codex workflow trial](docs/CODEX-VALIDATION.md) exercised user model/criteria selection, three isolated evaluator launches, evidence checking, Plan, and native Goal registration. It loaded the installed skill manually, so native selector discovery was not verified. **Claude Code live execution remains untested.** The launcher accepted `gpt-6.1-sol` / `high` for all three; backend model identity was not independently attested. Same-model agreement is not proof.
+
+Local tests cover installation, explicit-only metadata, license copying, identical workflow bodies, and cleanup/retry after copy failure. This single workflow trial does not establish a reliability or performance gain.
 
 ```sh
 python -m unittest discover -s tests -v
@@ -95,6 +97,6 @@ python -m unittest discover -s tests -v
 
 ## License and credits
 
-[MIT](LICENSE). [Packaging references](docs/ACKNOWLEDGMENTS.md) include Ponytail, i-have-adhd, and Graphify. No code, skill text, benchmarks, or artwork was copied from those projects.
+[MIT](LICENSE).
 
 MAGI is a thematic reference. This project claims no affiliation with the franchise or the supported model providers.
