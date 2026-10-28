@@ -12,7 +12,7 @@ Before publishing:
 
 ## Local verification
 
-The optional plan + challenge mode adds a primary planner, a different-model challenger, fixed source/criteria, an evidence disposition ledger, and one consolidated Plan/Goal. Its reference is included in both host installations. Existing live-trial records concern three-lens mode only; the new mode and cross-host handoff remain untested end to end.
+The optional plan + challenge mode adds a primary planner, a different-model challenger, fixed source/criteria, an evidence disposition ledger, and one consolidated Plan/Goal. Its reference is included in both host installations. The [scoped cross-host trial](PLAN-CHALLENGE-VALIDATION.md) exercised a user-authorized local CLI handoff and a textual Goal. Private review inputs and conclusions remain outside this distribution. Manual transport and amended wording were not rerun as separate live trials.
 
 ```sh
 python -m unittest discover -s tests -v

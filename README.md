@@ -55,7 +55,7 @@ changes. Classify the findings and consolidate one final Plan and Goal.
 
 Use `$magi-review` in Codex. These are instructions to the skill, not flags for a separate CLI.
 
-**Using Claude and Codex together:** if your host cannot run both selected models, the skill offers a manual handoff with the same brief, source manifest, criteria, and draft. It does not automatically route between providers or treat a handoff packet as a completed review. See [the workflow](skills/magi-review/references/plan-challenge.md).
+**Using Claude and Codex together:** if your host cannot run both selected models, use a manual handoff or an available second-host tool/CLI whose execution and source access you authorize. Both roles receive the same brief, source snapshot, and criteria; the challenger additionally receives the frozen primary draft. The skill supplies no provider router and does not treat a handoff packet or command launch as a completed review. Keep private review artifacts outside the public skill repository; publishing skill improvements does not authorize publishing the reviewed project. See [the workflow](skills/magi-review/references/plan-challenge.md).
 
 ## Three lenses, one shared problem
 
@@ -108,7 +108,9 @@ The package requires host support for subagents and model selection/inheritance.
 
 The [Codex trial](docs/CODEX-VALIDATION.md) exercised user model/criteria selection, three isolated evaluator launches, evidence checking, Plan, and native Goal registration. It loaded the installed skill manually, so Codex selector discovery was not verified. The [Claude Code trial](docs/CLAUDE-VALIDATION.md) verified native slash-command loading, three `opus/high` evaluator calls with distinct contexts, coordinator evidence checks, Plan, and an explicitly unregistered textual Goal. Response messages reported `claude-opus-5-5` for all three. These are host-reported identifiers, not independent backend attestation. Same-model agreement is not proof.
 
-Local tests cover installation, explicit-only metadata, license copying, identical workflow bodies, bundled workflow references, and cleanup/retry after copy failure. The recorded live trials cover **three-lens mode only**. Plan + challenge and cross-host handoff have not yet had a live end-to-end trial. These procedural options do not establish a reliability or performance gain. Default inheritance, alternate models, and resumed peer cross-checks remain untested.
+The [plan + challenge trial](docs/PLAN-CHALLENGE-VALIDATION.md) exercised a fresh `gpt-6.1-sol/high` planner and a fresh Claude `opus/high` challenger through an explicitly authorized local CLI handoff, frozen inputs, source-based consolidation, and a textual Goal. Private project artifacts are excluded from the public report. Manual transport and the post-trial wording changes were not rerun as a separate live review.
+
+Local tests cover installation, explicit-only metadata, license copying, identical workflow bodies, bundled workflow references, and cleanup/retry after copy failure. These procedural trials do not establish a reliability or performance gain. Default inheritance, other model combinations, and resumed peer cross-checks remain untested.
 
 ```sh
 python -m unittest discover -s tests -v
