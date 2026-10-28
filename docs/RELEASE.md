@@ -1,0 +1,19 @@
+# Release checklist
+
+Prepared 2026-10-28 for initial public publication at [YangSSo51/magi-review](https://github.com/YangSSo51/magi-review).
+
+Before publishing:
+
+- Verify the intended publishing account before each publication; do not use or modify the PC's existing Git account settings as a shortcut. Commit identity is repository-local.
+- Confirm public visibility and repository name. MIT has been selected following the user's reference-project direction; the root LICENSE uses the project contributor attribution, not the PC's Git identity.
+- Re-run local checks. Inspect the exact file list and diff before committing. This package has no vendored code, third-party runtime dependencies, credentials, private account settings, or machine-specific absolute paths. The public repository URL and owner are intentional.
+- Perform an explicitly authorized small live trial in each supported host when available: model choice, criteria acceptance, three actual same-model agents, disagreement handling, and textual Goal fallback. Record actual host versions/model evidence. Do not label static checks as end-to-end validation.
+- Publish from this directory only after account identity is established. Keep credentials in the host/CLI credential manager, outside this package. Do not copy local Git config or chat logs into the repository.
+
+## Local verification
+
+```sh
+python -m unittest discover -s tests -v
+```
+
+The installer needs no third-party dependencies. Tests run in temporary directories and make no model or network calls.
