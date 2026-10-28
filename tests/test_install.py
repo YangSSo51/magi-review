@@ -21,6 +21,9 @@ class InstallTests(unittest.TestCase):
                 self.assertEqual(actual.split("\n---\n", 1)[1],
                                  source.split("\n---\n", 1)[1])
                 self.assertTrue((target / "references/hosts.md").is_file())
+                for reference in (installer.SOURCE / "references").glob("*.md"):
+                    self.assertEqual((target / "references" / reference.name).read_bytes(),
+                                     reference.read_bytes())
                 self.assertEqual((target / "LICENSE").read_text(encoding="utf-8"),
                                  (ROOT / "LICENSE").read_text(encoding="utf-8"))
                 if host == "claude":

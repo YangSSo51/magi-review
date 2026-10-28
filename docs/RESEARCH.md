@@ -13,6 +13,8 @@ Checked 2026-10-28. These are original summaries of primary sources, not reprodu
 
 ## Design choices, not research conclusions
 
+The optional plan + challenge mode uses a frozen primary draft and a different-model critique on identical source/criteria, followed by a disposition ledger and one final plan. This is a workflow design choice; the cited studies do not establish that this package's new mode outperforms three lenses or a single-model review. Cross-provider handoff is procedural, not an automatic model integration.
+
 - Three complementary task lenses, not three personalities or a correctness guarantee.
 - Same-model evaluation controls one source of variation but permits correlated errors.
 - A user-accepted criteria list prevents agents from optimizing incompatible goals.

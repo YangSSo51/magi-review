@@ -1,8 +1,8 @@
 # MAGI Review
 
-**Review a hard decision from three perspectives. Turn the findings into an executable plan.**
+**Review a hard decision. Challenge the assumptions. Leave with one executable plan.**
 
-A skill for **Claude Code and Codex**. Choose one model, agree on what matters, and let three independent subagents examine the same problem before you commit to an approach.
+A skill for **Claude Code and Codex** with two selectable workflows: three independent perspectives using one model, or a primary plan challenged by a different model. Both keep the source snapshot and accepted criteria fixed, then consolidate the evidence into one Plan and execution Goal.
 
 [Get started](#get-started) · [Example](#example) · [Research](docs/RESEARCH.md) · [한국어](README.ko.md) · [MIT](LICENSE)
 
@@ -38,6 +38,25 @@ Open a fresh host session or use its supported skill reload mechanism, and confi
 
 MAGI Review runs only when explicitly invoked. It adds no global instructions and changes no account/model defaults.
 
+## Choose your review mode
+
+| Mode | Roles | Best fit |
+| --- | --- | --- |
+| **Three lenses** (default recommendation) | Three independent evaluators, one selected model | Explore an ambiguous problem from complementary perspectives. |
+| **Plan + challenge** | A primary planner and a different-model challenger | Check a proposed approach for false claims, missed failure paths, and unnecessary changes. |
+
+Select the mode and models at intake; choices already supplied are reused. In plan + challenge, select the planner and challenger separately. The challenger reviews the frozen primary draft against the same source and criteria, rather than writing a competing plan from scratch.
+
+```text
+/magi-review Use plan + challenge. Let me choose the planner and challenger
+models. Recommend criteria first and pin the code version, including local
+changes. Classify the findings and consolidate one final Plan and Goal.
+```
+
+Use `$magi-review` in Codex. These are instructions to the skill, not flags for a separate CLI.
+
+**Using Claude and Codex together:** if your host cannot run both selected models, the skill offers a manual handoff with the same brief, source manifest, criteria, and draft. It does not automatically route between providers or treat a handoff packet as a completed review. See [the workflow](skills/magi-review/references/plan-challenge.md).
+
 ## Three lenses, one shared problem
 
 | Evaluator | What it examines |
@@ -46,19 +65,19 @@ MAGI Review runs only when explicitly invoked. It adds no global instructions an
 | **Correctness & safety** | What can fail? Which contracts, data, and compatibility guarantees must hold? |
 | **Simplicity & operability** | Is there a simpler approach? What will this cost to build, operate, maintain, and reverse? |
 
-All three use the **same user-selected model** and accepted criteria. They evaluate independently before seeing each other's conclusions. The coordinator checks material disagreements against evidence and preserves unresolved issues.
+In three-lens mode, all three use the **same user-selected model** and accepted criteria. They evaluate independently before seeing each other's conclusions. The coordinator checks material disagreements against evidence and preserves unresolved issues. Plan + challenge uses its two-role sequence instead; it does not also launch these three evaluators.
 
 These are evaluation responsibilities, not strict/lenient personalities. A supported must-have violation cannot be voted away.
 
 ## How it works
 
-1. **Choose the model.** Pick from the host's available subagent models or **Default**, meaning current session inheritance for this review.
+1. **Choose the mode and models.** Use supported model choices or **Default**, meaning verified current-session inheritance for the role. Plan + challenge requires different planner/challenger models.
 2. **Describe the situation.** The assistant helps clarify your purpose, constraints, and success conditions.
-3. **Agree on criteria.** The assistant recommends task-specific criteria, priorities, and observable evidence. Accept or edit the list before evaluation.
-4. **Review independently.** Three read-only subagents evaluate the same brief, each through its own lens.
-5. **Resolve what matters.** Check decision-changing disputes once, then produce the Plan and execution Goal.
+3. **Freeze the inputs.** Accept or edit the recommended criteria, priorities, and observable evidence. Record stable criterion IDs and the code snapshot, including relevant dirty/untracked inputs; HEAD alone is insufficient when local changes matter.
+4. **Run the selected review.** Either three independent lens evaluations, or a primary draft followed by a different-model critique. Roles are read-only and use the same frozen inputs.
+5. **Resolve what matters.** In challenge mode, classify findings as confirmed, conditional, rejected, or insufficient evidence, with source evidence and resulting plan changes. Produce one consolidated Plan and execution Goal, keeping unresolved prerequisites visible.
 
-You can authorize the recommendations upfront: `Use Default and your recommended criteria; produce a Plan and a Goal draft.`
+You can authorize choices upfront: `Use three lenses, Default, and your recommended criteria; produce a Plan and a Goal draft.` A material source/criteria change invalidates affected comparisons; it must be reconciled rather than silently merged.
 
 ## Example
 
@@ -89,7 +108,7 @@ The package requires host support for subagents and model selection/inheritance.
 
 The [Codex trial](docs/CODEX-VALIDATION.md) exercised user model/criteria selection, three isolated evaluator launches, evidence checking, Plan, and native Goal registration. It loaded the installed skill manually, so Codex selector discovery was not verified. The [Claude Code trial](docs/CLAUDE-VALIDATION.md) verified native slash-command loading, three `opus/high` evaluator calls with distinct contexts, coordinator evidence checks, Plan, and an explicitly unregistered textual Goal. Response messages reported `claude-opus-5-5` for all three. These are host-reported identifiers, not independent backend attestation. Same-model agreement is not proof.
 
-Local tests cover installation, explicit-only metadata, license copying, identical workflow bodies, and cleanup/retry after copy failure. These scoped workflow trials do not establish a reliability or performance gain. Default inheritance, alternate models, and resumed peer cross-checks remain untested.
+Local tests cover installation, explicit-only metadata, license copying, identical workflow bodies, bundled workflow references, and cleanup/retry after copy failure. The recorded live trials cover **three-lens mode only**. Plan + challenge and cross-host handoff have not yet had a live end-to-end trial. These procedural options do not establish a reliability or performance gain. Default inheritance, alternate models, and resumed peer cross-checks remain untested.
 
 ```sh
 python -m unittest discover -s tests -v

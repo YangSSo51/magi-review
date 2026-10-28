@@ -35,3 +35,14 @@ Before review, the request leaves interruption, compatibility, and recovery requ
 - An execution Goal describing outcomes, acceptance evidence, permissions, and stop/replan conditions.
 
 The example does not preselect a migration technique or invent successful test results. If the user requested review only, the deliverable ends with the Plan and Goal draft.
+
+## Plan + challenge variant
+
+```text
+/magi-review Use plan + challenge for the same migration decision.
+Let me choose the primary and challenger models. Recommend criteria first.
+```
+
+After acceptance, label the criteria C1–C4 and freeze the reviewed commit plus relevant local changes. The primary model drafts P1… steps using those inputs. A different model receives the same inputs and the exact frozen draft, then returns F1… findings tied to P/C IDs. The coordinator checks each finding against the source and records its disposition and plan change. A proposed test is not evidence that a failure occurred.
+
+Return one corrected Plan, one execution Goal, and the short findings ledger. If the challenger used another commit or changed the interruption budget, reconcile that mismatch before consolidation. If the models require separate hosts, provide a manual handoff packet; do not claim the challenger ran just because its prompt was prepared. This variant is illustrative and has not been live-tested.
