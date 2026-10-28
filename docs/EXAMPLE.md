@@ -5,9 +5,11 @@ Illustrative conversation and output shape only. This is not an executed review 
 ## Starting request
 
 ```text
-Use MAGI review. We need to migrate our production database with minimal
+/magi-review We need to migrate our production database with minimal
 interruption. Help define the criteria before choosing an approach.
 ```
+
+Use `$magi-review` instead of `/magi-review` in Codex. The explicit command matters; a plain request mentioning MAGI is not a substitute for native skill invocation.
 
 The assistant first offers the host-supported model choices and Default (current session inheritance), then clarifies the interruption budget, compatibility needs, migration size, and rollback constraints only where unknown.
 

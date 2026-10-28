@@ -37,6 +37,6 @@ python /path/to/magi-review/scripts/install.py --host claude --destination .clau
 
 [연구 노트](docs/RESEARCH.md)는 성공 사례와 부정적 결과를 함께 다룹니다. 특히 동일 모델의 세 역할을 사용한 MABPD, 역할 편향을 확인한 Beyond Consensus, 같은 예산의 독립 응답과 비교한 Beyond Symmetric Agents가 설계에 관련됩니다. 이 스킬 자체가 최신 고성능 모델의 개발 작업에서 성능을 높인다는 실험 결과는 아직 없습니다.
 
-Codex에서 모델·판단 기준 선택, 격리된 세 평가자 실행, 근거 확인, Plan과 네이티브 Goal 등록을 [한 차례 검증했습니다](docs/CODEX-VALIDATION.md). 설치된 스킬을 수동으로 읽어 실행했으므로 선택기 자동 발견은 미검증이며, Claude Code의 실제 모델 실행도 아직 검증하지 않았습니다. 세 호출에 `gpt-6.1-sol/high`를 지정했지만 백엔드 모델의 독립 인증은 제공되지 않았습니다. 한 번의 실행은 성능 향상이나 일반적 신뢰성을 입증하지 않습니다.
+Codex의 모델·판단 기준 선택, 격리된 세 평가자 실행, 근거 확인, Plan과 네이티브 Goal 등록을 [검증했습니다](docs/CODEX-VALIDATION.md). Codex 선택기 자동 발견은 미검증입니다. [Claude Code 검증](docs/CLAUDE-VALIDATION.md)에서는 네이티브 슬래시 호출, 서로 다른 컨텍스트의 `opus/high` 세 평가자, 조정자의 근거 확인, Plan과 미등록 텍스트 Goal을 확인했습니다. 세 평가자의 응답은 `claude-opus-5-5`를 표시했으며 이는 호스트의 모델 식별 정보로, 백엔드의 독립 인증은 아닙니다. Default 상속·다른 모델·원래 평가자를 재개하는 교차 검토는 미검증이며, 이 실행들은 성능 향상이나 일반적 신뢰성을 입증하지 않습니다.
 
 MIT 라이선스로 배포합니다. [GitHub 저장소](https://github.com/YangSSo51/magi-review)에서 설치할 수 있습니다. [게시 및 검증 확인 사항](docs/RELEASE.md)

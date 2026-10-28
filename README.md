@@ -87,9 +87,9 @@ MAGI Review is **research-informed; this exact workflow has not been benchmarked
 
 The package requires host support for subagents and model selection/inheritance. It does not install models, provide cross-provider routing, or require API keys of its own. Reviews consume your host's normal model usage. Unsupported capabilities are reported rather than simulated. See [host notes](skills/magi-review/references/hosts.md).
 
-One [Codex workflow trial](docs/CODEX-VALIDATION.md) exercised user model/criteria selection, three isolated evaluator launches, evidence checking, Plan, and native Goal registration. It loaded the installed skill manually, so native selector discovery was not verified. **Claude Code live execution remains untested.** The launcher accepted `gpt-6.1-sol` / `high` for all three; backend model identity was not independently attested. Same-model agreement is not proof.
+The [Codex trial](docs/CODEX-VALIDATION.md) exercised user model/criteria selection, three isolated evaluator launches, evidence checking, Plan, and native Goal registration. It loaded the installed skill manually, so Codex selector discovery was not verified. The [Claude Code trial](docs/CLAUDE-VALIDATION.md) verified native slash-command loading, three `opus/high` evaluator calls with distinct contexts, coordinator evidence checks, Plan, and an explicitly unregistered textual Goal. Response messages reported `claude-opus-5-5` for all three. These are host-reported identifiers, not independent backend attestation. Same-model agreement is not proof.
 
-Local tests cover installation, explicit-only metadata, license copying, identical workflow bodies, and cleanup/retry after copy failure. This single workflow trial does not establish a reliability or performance gain.
+Local tests cover installation, explicit-only metadata, license copying, identical workflow bodies, and cleanup/retry after copy failure. These scoped workflow trials do not establish a reliability or performance gain. Default inheritance, alternate models, and resumed peer cross-checks remain untested.
 
 ```sh
 python -m unittest discover -s tests -v

@@ -20,4 +20,8 @@ The installer needs no third-party dependencies. Tests run in temporary director
 
 ## Codex workflow trial
 
-See [the scoped run report](CODEX-VALIDATION.md) for the three evaluator launches, findings, Plan, and native Goal registration. Claude Code live execution, native selector discovery, backend identity attestation, and comparative performance remain unverified.
+See [the scoped run report](CODEX-VALIDATION.md) for the three evaluator launches, findings, Plan, and native Goal registration. Codex selector discovery, backend identity attestation, and comparative performance remain unverified.
+
+## Claude Code workflow trial
+
+See [the Claude run report](CLAUDE-VALIDATION.md) for native slash-command loading, `opus/high` selection, three distinct evaluator contexts, source-based dispute checking, Plan, and an unregistered textual Goal. One explicit-model path on 2.1.311 was observed; it does not establish other versions/models, Default inheritance, resumed peer follow-up, or comparative quality.

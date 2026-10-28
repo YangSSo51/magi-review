@@ -31,15 +31,17 @@ The script copies the skill and MIT license, applies the host's explicit-only se
 ## Without Python
 
 1. Copy `skills/magi-review` to the appropriate skill folder and copy the root `LICENSE` into that installed folder.
-2. For Claude Code, add `disable-model-invocation: true` inside SKILL.md's opening YAML frontmatter. Codex uses the supplied `agents/openai.yaml`.
+2. For Claude Code, add `disable-model-invocation: true` inside SKILL.md's opening YAML frontmatter and omit the Codex-only `agents/` directory. Codex uses the supplied `agents/openai.yaml`.
 3. Open a fresh host session or use its supported skill reload command, then explicitly invoke `$magi-review` in Codex or `/magi-review` in Claude Code.
 
 ## After either installation method
 
 Open a fresh host session or use that client's supported skill reload mechanism. Confirm that MAGI Review appears in its skill selector or command list before invoking it. A successful installer exit confirms files were written; it does not confirm that an already-running session discovered them. If it is missing, check the active client's skill paths and duplicate installations before retrying.
 
+Client modes or customization policies can suppress project skills. In the Claude Code 2.1.311 trial, `--restricted` omitted the installed command while a normal-project session loaded it. Diagnose the active settings/mode before reinstalling; do not automatically weaken security controls to make a skill load. See [the scoped trial report](docs/CLAUDE-VALIDATION.md).
+
 ## Update or remove
 
-Back up your existing installation and local edits before replacing files from a new download. The installer intentionally has no overwrite or auto-update option. To remove the skill, delete only the installed `magi-review` directory you selected. Never delete a whole skills parent directory.
+Back up your existing installation and local edits outside all host-discovered skills directories before replacing files from a new download. A renamed backup folder containing SKILL.md under the same skills parent may still be discovered as a duplicate. The installer intentionally has no overwrite or auto-update option. To remove the skill, delete only the installed `magi-review` directory you selected. Never delete a whole skills parent directory.
 
 See [host notes](skills/magi-review/references/hosts.md) for runtime limitations. Installation success is not proof of model availability or a successful three-agent review.
